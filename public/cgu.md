@@ -129,7 +129,7 @@ Les données à caractère personnel sont utilisées exclusivement à des fins l
 - au fonctionnement de certaines fonctionnalités du service (ex. historique généré avec les données d’utilisation, tableau de bord alimenté par les données de nom et prénom, temps de travail, nom de la mission, saisie du temps de travail simplifiée par les données de géolocalisation envisagée à terme) ;
 - à l’amélioration de l'expérience sur Mobilic (analyse de l’expérience par ex. - non mis en place à date - pour identifier les points de blocage, etc.).
 
-Les données sont conservées pour une durée maximale de 3 ans.
+Les données sont conservées pour une durée maximale de 1 an.
 
 ## Vos droits
 
