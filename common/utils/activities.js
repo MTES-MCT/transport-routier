@@ -6,18 +6,21 @@ export const SWITCH_ACTIVITIES = {
     name: "drive",
     label: "Déplacement",
     renderIcon: props => <TruckIcon {...props} />,
+    color: "#1CE88C",
     canBeFirst: true
   },
   work: {
     name: "work",
     label: "Autre tâche",
     renderIcon: props => <WorkIcon {...props} />,
-    canBeFirst: true
+    canBeFirst: true,
+    color: "#F3A817"
   },
   break: {
     name: "break",
     label: "Pause",
-    renderIcon: props => <RestIcon {...props} />
+    renderIcon: props => <RestIcon {...props} />,
+    color: "#AA7AF8"
   }
 };
 
@@ -26,7 +29,8 @@ export const ACTIVITIES = {
   support: {
     name: "support",
     label: "Accompagnement",
-    renderIcon: props => <TruckIcon {...props} />
+    renderIcon: props => <TruckIcon {...props} />,
+    color: "#1CE88C"
   }
 };
 

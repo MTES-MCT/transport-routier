@@ -31,7 +31,11 @@ const useStyles = makeStyles(theme => ({
   },
   longBreak: {
     color: theme.palette.success.main
-  }
+  },
+  avatar: props => ({
+    backgroundColor: props.color,
+    color: theme.palette.primary.contrastText
+  })
 }));
 
 function ActivityItem({
@@ -47,7 +51,7 @@ function ActivityItem({
   showDates = false
 }) {
   const modals = useModals();
-  const classes = useStyles();
+  const classes = useStyles({ color: ACTIVITIES[activity.type].color });
 
   const datetimeFormatter = showDates ? formatDateTime : formatTimeOfDay;
   const isBreak = activity.type === ACTIVITIES.break.name;
@@ -57,14 +61,8 @@ function ActivityItem({
   return (
     <ListItem disableGutters>
       <ListItemAvatar>
-        <Avatar>
-          {ACTIVITIES[activity.type].renderIcon(
-            isLongBreak
-              ? { className: classes.longBreak }
-              : isBreak
-              ? {}
-              : { color: "primary" }
-          )}
+        <Avatar className={classes.avatar}>
+          {ACTIVITIES[activity.type].renderIcon()}
         </Avatar>
       </ListItemAvatar>
       <ListItemText

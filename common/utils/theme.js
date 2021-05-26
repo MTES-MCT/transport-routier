@@ -23,7 +23,7 @@ const baseOptions = {
     drive: cyan[500],
     rest: red[600],
     primary: {
-      main: "#0053b3",
+      main: "#3184FF",
       light: "#006be6",
       lighter: "#b4e1fa",
       dark: "#003b80"

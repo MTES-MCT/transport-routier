@@ -3,9 +3,9 @@ import React from "react";
 import omit from "lodash/omit";
 import { ReactComponent as PersonIcon_ } from "../assets/images/User.svg";
 import { ReactComponent as TeamIcon_ } from "../assets/images/Team.svg";
-import { ReactComponent as TruckIcon_ } from "../assets/images/Truck.svg";
-import { ReactComponent as HammerWenchIcon_ } from "../assets/images/Hammer Wench.svg";
-import { ReactComponent as BedIcon_ } from "../assets/images/Bed.svg";
+import { ReactComponent as TruckIcon_ } from "../assets/images/Truck2.svg";
+import { ReactComponent as HammerWenchIcon_ } from "../assets/images/Work.svg";
+import { ReactComponent as BedIcon_ } from "../assets/images/Bed2.svg";
 import { ReactComponent as FranceConnectIcon_ } from "../assets/images/FranceConnect.svg";
 import { ReactComponent as FabNumIcon_ } from "../assets/images/fabnum.svg";
 import { ReactComponent as MarianneIcon_ } from "common/assets/images/marianne.svg";
@@ -41,7 +41,7 @@ export function TruckIcon(props) {
     <SvgIcon
       titleAccess="déplacement"
       {...props}
-      viewBox="0 0 64 64"
+      viewBox="0 0 246.14 157.79"
       component={TruckIcon_}
     />
   );
@@ -52,7 +52,7 @@ export function WorkIcon(props) {
     <SvgIcon
       titleAccess="autre tâche"
       {...props}
-      viewBox="0 0 64 64"
+      viewBox="0 0 189.57 153.6"
       component={HammerWenchIcon_}
     />
   );
@@ -63,7 +63,7 @@ export function RestIcon(props) {
     <SvgIcon
       titleAccess="pause"
       {...props}
-      viewBox="0 0 64 64"
+      viewBox="0 0 166.12 185.92"
       component={BedIcon_}
     />
   );

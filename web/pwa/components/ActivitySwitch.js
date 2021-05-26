@@ -12,6 +12,7 @@ import { MainCtaButton } from "./MainCtaButton";
 import fromPairs from "lodash/fromPairs";
 import uniq from "lodash/uniq";
 import { now } from "common/utils/time";
+import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -26,14 +27,12 @@ const useStyles = makeStyles(theme => ({
     maxWidth: 120
   },
   card: props => ({
-    backgroundColor: props.current
-      ? theme.palette.primary.main
-      : theme.palette.background.paper,
+    backgroundColor: props.disabled
+      ? theme.palette.background.paper
+      : props.color,
     color: props.disabled
       ? theme.palette.grey[500]
-      : props.current
-      ? theme.palette.primary.contrastText
-      : theme.palette.text.primary,
+      : theme.palette.primary.contrastText,
     cursor: props.disabled ? "inherit" : "pointer"
   }),
   cardContent: {
@@ -64,9 +63,10 @@ export function ActivitySwitchCard({
   renderIcon,
   current,
   disabled,
-  onClick
+  onClick,
+  color
 }) {
-  const classes = useStyles({ current, disabled });
+  const classes = useStyles({ current, disabled, color });
   return (
     <Card className={classes.card} onClick={!disabled ? onClick : null} raised>
       <Box className={`${classes.cardContent} flex-column-space-between`}>
@@ -154,24 +154,44 @@ export function ActivitySwitch({
         alignItems={"center"}
         spacing={2}
       >
-        {Object.values(SWITCH_ACTIVITIES).map(activity => (
-          <Grid item className={classes.gridItem} xs key={activity.name}>
-            <ActivitySwitchCard
-              label={activity.label}
-              renderIcon={activity.renderIcon}
-              current={
-                latestActivity &&
-                (!latestActivity.endTime
-                  ? activity.name === latestActivity.type ||
-                    (activity === ACTIVITIES.drive &&
-                      latestActivity.type === ACTIVITIES.support.name)
-                  : activity === ACTIVITIES.break)
-              }
-              onClick={handleActivitySwitch(activity.name)}
-              disabled={disableBreak && activity.name === ACTIVITIES.break.name}
-            />
-          </Grid>
-        ))}
+        {Object.values(SWITCH_ACTIVITIES).map(activity => {
+          const current =
+            latestActivity &&
+            (!latestActivity.endTime
+              ? activity.name === latestActivity.type ||
+                (activity === ACTIVITIES.drive &&
+                  latestActivity.type === ACTIVITIES.support.name)
+              : activity === ACTIVITIES.break);
+          return (
+            <Grid
+              item
+              className={classes.gridItem}
+              xs
+              key={activity.name}
+              style={{ marginBottom: current ? 16 : 0, lineHeight: 0 }}
+            >
+              <ArrowDropUpIcon
+                viewBox="0 8 24 8"
+                style={{
+                  color: activity.color,
+                  visibility: current ? "visible" : "hidden",
+                  width: 24,
+                  height: 8
+                }}
+              />
+              <ActivitySwitchCard
+                label={activity.label}
+                renderIcon={activity.renderIcon}
+                current={current}
+                onClick={handleActivitySwitch(activity.name)}
+                disabled={
+                  disableBreak && activity.name === ACTIVITIES.break.name
+                }
+                color={activity.color}
+              />
+            </Grid>
+          );
+        })}
       </Grid>
       {endMission && (
         <Box pt={6} pb={2}>

@@ -5,17 +5,24 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import { Header } from "../common/Header";
-import Hidden from "@material-ui/core/Hidden";
 import { ManagerImage, SoftwareImage, WorkerImage } from "common/utils/icons";
 import withWidth, { isWidthDown } from "@material-ui/core/withWidth";
-import BackgroundImage from "common/assets/images/hero.jpg";
-import BackgroundImageSmall from "common/assets/images/hero_small.jpg";
+import BackgroundImage from "common/assets/images/landing-hero-2.svg";
+import BackgroundImageSmall from "common/assets/images/landing-hero-3.svg";
 import { MainCtaButton } from "../pwa/components/MainCtaButton";
 import { Footer } from "./footer";
 
 const useStyles = makeStyles(theme => ({
   whiteSection: {
     backgroundColor: theme.palette.background.paper
+  },
+  heroContainer: {
+    backgroundColor: "#3184FF",
+    padding: 0,
+    margin: 0
+  },
+  heroInner: {
+    padding: 0
   },
   section: {
     paddingTop: theme.spacing(7),
@@ -56,11 +63,6 @@ const useStyles = makeStyles(theme => ({
     padding: 0
   },
   bgImage: {
-    background: `url(${BackgroundImage}) 50%`,
-    [theme.breakpoints.down(500)]: {
-      background: `url(${BackgroundImageSmall}) 100%`
-    },
-    backgroundSize: "cover",
     paddingTop: theme.spacing(14),
     paddingBottom: theme.spacing(14)
   },
@@ -165,29 +167,27 @@ function _Showcase({
 const Showcase = withWidth()(_Showcase);
 
 export function Landing() {
-  const classes = useStyles();
+  const [width, setWidth] = React.useState(window.innerWidth);
+
+  React.useLayoutEffect(() => {
+    function updateWidth() {
+      setWidth(window.innerWidth);
+    }
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
+  }, []);
+
+  const classes = useStyles({ width });
   return [
     <Header key={1} />,
-    <Container
-      key={2}
-      className={`${classes.section} ${classes.bgImage}`}
-      maxWidth={false}
-    >
-      <Container maxWidth="md" className={classes.inner}>
-        <Grid container direction="column" wrap alignItems="center" spacing={1}>
-          <Grid item className={classes.whiteSection}>
-            <Typography variant="h1">Bienvenue sur Mobilic !</Typography>
-          </Grid>
-          <Hidden xsDown>
-            <Grid item className={classes.whiteSection}>
-              <Box mt={2}>
-                <Typography variant="h1" style={{ fontWeight: "normal" }}>
-                  Le suivi de votre temps de travail : fiable, facile, et rapide
-                </Typography>
-              </Box>
-            </Grid>
-          </Hidden>
-        </Grid>
+    <Container key={2} maxWidth={false} className={classes.heroContainer}>
+      <Container maxWidth="xl" className={`fade-in-image ${classes.heroInner}`}>
+        <img
+          src={width < 500 ? BackgroundImageSmall : BackgroundImage}
+          width="100%"
+          height="100%"
+          style={{ float: "left" }}
+        />
       </Container>
     </Container>,
     <Container
