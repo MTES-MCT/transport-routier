@@ -1,6 +1,8 @@
 import SvgIcon from "@material-ui/core/SvgIcon";
 import React from "react";
 import omit from "lodash/omit";
+import { ReactComponent as MobilicFilledIcon_ } from "../assets/images/mobilic-logo-filled.svg";
+import { ReactComponent as MobilicOutlinedIcon_ } from "../assets/images/mobilic-logo-outlined.svg";
 import { ReactComponent as PersonIcon_ } from "../assets/images/User.svg";
 import { ReactComponent as TeamIcon_ } from "../assets/images/Team.svg";
 import { ReactComponent as TruckIcon_ } from "../assets/images/Truck2.svg";
@@ -13,6 +15,28 @@ import _ManagerImage from "../assets/images/Manager.svg";
 import _WorkerImage from "../assets/images/worker.svg";
 import _SoftwareImage from "../assets/images/software.svg";
 import _NoDataImage from "../assets/images/no-data.png";
+
+export function MobilicLogoFilledIcon(props) {
+  return (
+    <SvgIcon
+      titleAccess={"mobilic-filled"}
+      {...props}
+      viewBox="0 0 255.27 297.23"
+      component={MobilicFilledIcon_}
+    />
+  );
+}
+
+export function MobilicLogoOutlinedIcon(props) {
+  return (
+    <SvgIcon
+      titleAccess={"mobilic-outlined"}
+      {...props}
+      viewBox="-5 -5 265.27 310"
+      component={MobilicOutlinedIcon_}
+    />
+  );
+}
 
 export function PersonIcon(props) {
   return (

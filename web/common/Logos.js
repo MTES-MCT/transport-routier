@@ -1,7 +1,5 @@
 import React from "react";
-import { ReactComponent as BetaGouvTextIcon } from "common/assets/images/betagouvfr.svg";
-import SvgIcon from "@material-ui/core/SvgIcon";
-import Typography from "@material-ui/core/Typography";
+import MobilicLogoWithText from "common/assets/images/mobilic-logo-with-text.svg";
 import Box from "@material-ui/core/Box";
 import { LinkButton } from "./LinkButton";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
@@ -17,31 +15,25 @@ export function Logos({ leaveSpaceForMenu = true }) {
     theme.breakpoints.up("sm")
   );
   return (
-    <LinkButton
-      style={{ borderRadius: 0, textTransform: "none" }}
-      to={getFallbackRoute({
-        userInfo: store.userInfo(),
-        companies: store.companies()
-      })}
-    >
-      <Box className="flex-row-flex-start">
-        {(leaveSpaceForMenu
-          ? shouldDisplayBothLogosAndMenu
-          : shouldDisplayBothLogosWithoutMenu) && (
-          <Box mr={2}>
-            <MarianneIcon
-              style={{ fontSize: shouldDisplayFullSizeLogo ? 60 : 40 }}
-              className="marianne-logo"
-            />
-          </Box>
-        )}
-        <Typography className="project-name">mobilic</Typography>
-        <SvgIcon
-          viewBox="0 0 117 40"
-          className="betagouv-text"
-          component={BetaGouvTextIcon}
-        />
-      </Box>
-    </LinkButton>
+    <Box className="flex-row-flex-start">
+      {(leaveSpaceForMenu
+        ? shouldDisplayBothLogosAndMenu
+        : shouldDisplayBothLogosWithoutMenu) && (
+        <Box mr={2}>
+          <MarianneIcon
+            style={{ fontSize: shouldDisplayFullSizeLogo ? 60 : 40 }}
+          />
+        </Box>
+      )}
+      <LinkButton
+        style={{ borderRadius: 0, textTransform: "none" }}
+        to={getFallbackRoute({
+          userInfo: store.userInfo(),
+          companies: store.companies()
+        })}
+      >
+        <img viewBox="0 0 367.18 129.5" height={50} src={MobilicLogoWithText} />
+      </LinkButton>
+    </Box>
   );
 }

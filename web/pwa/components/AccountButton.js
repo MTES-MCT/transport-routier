@@ -1,6 +1,5 @@
 import React from "react";
 import omit from "lodash/omit";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import Button from "@material-ui/core/Button";
 import { useStoreSyncedWithLocalStorage } from "common/utils/store";
 import { formatPersonName } from "common/utils/coworkers";
@@ -9,6 +8,7 @@ import Box from "@material-ui/core/Box";
 import { NavigationMenu } from "../../common/Header";
 import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import { MobilicLogoFilledIcon } from "common/utils/icons";
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -53,7 +53,7 @@ export function AccountButton(props) {
       </IconButton>
       <Button
         style={{ textTransform: "capitalize" }}
-        startIcon={<AccountCircleIcon />}
+        startIcon={<MobilicLogoFilledIcon />}
         variant="outlined"
         className={classes.button}
         disableElevation
