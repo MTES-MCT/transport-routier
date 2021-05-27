@@ -2,12 +2,10 @@ import React from "react";
 import Container from "@material-ui/core/Container";
 import { PlaceHolder } from "../../common/PlaceHolder";
 import Typography from "@material-ui/core/Typography";
-import { ReactComponent as HomeIcon } from "common/assets/images/Home.svg";
 import { useModals } from "common/utils/modals";
 import Box from "@material-ui/core/Box";
 import { AccountButton } from "../components/AccountButton";
 import { MainCtaButton } from "../components/MainCtaButton";
-import SvgIcon from "@material-ui/core/SvgIcon";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import { useStoreSyncedWithLocalStorage } from "common/utils/store";
 import List from "@material-ui/core/List";
@@ -26,10 +24,18 @@ import ListSubheader from "@material-ui/core/ListSubheader";
 import orderBy from "lodash/orderBy";
 import { LoadingButton } from "common/components/LoadingButton";
 import { useLoadingScreen } from "common/utils/loading";
+import BackgroundImage from "common/assets/images/landing-hero-vertical-without-text-logo.svg";
 
 const MAX_NON_VALIDATED_MISSIONS_TO_DISPLAY = 5;
 
 const useStyles = makeStyles(theme => ({
+  outer: {
+    flexGrow: 1,
+    display: "flex",
+    flexDirection: "column",
+    background: `url(${BackgroundImage})`,
+    backgroundSize: "cover"
+  },
   container: {
     position: "relative",
     justifyContent: "flex-start",
@@ -85,6 +91,16 @@ const useStyles = makeStyles(theme => ({
   },
   ellipsis: {
     color: theme.palette.grey[600]
+  },
+  ctaButton: {
+    backgroundColor: theme.palette.background.paper,
+    color: theme.palette.primary.main,
+    "&:hover": {
+      backgroundColor: theme.palette.background.default
+    }
+  },
+  subButton: {
+    color: theme.palette.background.paper
   }
 }));
 
@@ -170,94 +186,87 @@ export function BeforeWork({ beginNewMission, openHistory, missions }) {
     ["desc"]
   );
 
-  return [
-    <Container
-      key={1}
-      className={`container ${classes.container}`}
-      disableGutters
-      maxWidth={false}
-    >
-      <AccountButton p={2} className={classes.accountButton} />
-      <SvgIcon
-        viewBox="0 0 506 382"
-        className={classes.heroImage}
-        component={HomeIcon}
-      />
+  return (
+    <Container maxWidth={false} className={classes.outer} disableGutters>
+      <AccountButton p={2} className={classes.accountButton} darkBackground />
       <PlaceHolder>
         <Typography variant="h3">👋</Typography>
         <Typography variant="h3" className={classes.welcomeText}>
           Bienvenue sur Mobilic !
         </Typography>
       </PlaceHolder>
-    </Container>,
-    <Box key={2} mt={2} className="cta-container" mb={2}>
-      <MainCtaButton onClick={onEnterNewMissionFunnel}>
-        Commencer une mission
-      </MainCtaButton>
-      <LoadingButton
-        style={{ marginTop: 8 }}
-        color="primary"
-        onClick={() => {
-          openHistory();
-        }}
-      >
-        Voir mon historique
-      </LoadingButton>
-    </Box>,
-    nonValidatedMissions.length > 0 && (
-      <Box key={3} className={classes.missionsToValidateList}>
-        <List
-          subheader={
-            <ListSubheader
-              component="div"
-              color="inherit"
-              className={classes.listHeader}
-            >
-              Missions à valider
-              <span className={classes.listSubheader}>
-                Vérifiez les informations saisies par vous-même ou par vos
-                coéquipiers
-              </span>
-            </ListSubheader>
-          }
+      <Box key={2} mt={2} className="cta-container" mb={2}>
+        <MainCtaButton
+          className={classes.ctaButton}
+          onClick={onEnterNewMissionFunnel}
         >
-          {nonValidatedMissions
-            .slice(0, MAX_NON_VALIDATED_MISSIONS_TO_DISPLAY)
-            .map(m => (
-              <MissionItem key={m.id} mission={m} openHistory={openHistory} />
-            ))}
-          {nonValidatedMissions.length >
-            MAX_NON_VALIDATED_MISSIONS_TO_DISPLAY && (
-            <ListItem className={classes.ellipsis}>
-              <Typography>
-                +{" "}
-                {nonValidatedMissions.length -
-                  MAX_NON_VALIDATED_MISSIONS_TO_DISPLAY}{" "}
-                autre
-                {nonValidatedMissions.length -
-                  MAX_NON_VALIDATED_MISSIONS_TO_DISPLAY >
-                1
-                  ? "s"
-                  : ""}{" "}
-                mission
-                {nonValidatedMissions.length -
-                  MAX_NON_VALIDATED_MISSIONS_TO_DISPLAY >
-                1
-                  ? "s"
-                  : ""}{" "}
-                non validée
-                {nonValidatedMissions.length -
-                  MAX_NON_VALIDATED_MISSIONS_TO_DISPLAY >
-                1
-                  ? "s"
-                  : ""}
-              </Typography>
-            </ListItem>
-          )}
-        </List>
+          Commencer une mission
+        </MainCtaButton>
+        <LoadingButton
+          style={{ marginTop: 8 }}
+          className={classes.subButton}
+          onClick={() => {
+            openHistory();
+          }}
+        >
+          Voir mon historique
+        </LoadingButton>
       </Box>
-    )
-  ];
+      {nonValidatedMissions.length > 0 && (
+        <Box key={3} className={classes.missionsToValidateList}>
+          <List
+            subheader={
+              <ListSubheader
+                component="div"
+                color="inherit"
+                className={classes.listHeader}
+              >
+                Missions à valider
+                <span className={classes.listSubheader}>
+                  Vérifiez les informations saisies par vous-même ou par vos
+                  coéquipiers
+                </span>
+              </ListSubheader>
+            }
+          >
+            {nonValidatedMissions
+              .slice(0, MAX_NON_VALIDATED_MISSIONS_TO_DISPLAY)
+              .map(m => (
+                <MissionItem key={m.id} mission={m} openHistory={openHistory} />
+              ))}
+            {nonValidatedMissions.length >
+              MAX_NON_VALIDATED_MISSIONS_TO_DISPLAY && (
+              <ListItem className={classes.ellipsis}>
+                <Typography>
+                  +{" "}
+                  {nonValidatedMissions.length -
+                    MAX_NON_VALIDATED_MISSIONS_TO_DISPLAY}{" "}
+                  autre
+                  {nonValidatedMissions.length -
+                    MAX_NON_VALIDATED_MISSIONS_TO_DISPLAY >
+                  1
+                    ? "s"
+                    : ""}{" "}
+                  mission
+                  {nonValidatedMissions.length -
+                    MAX_NON_VALIDATED_MISSIONS_TO_DISPLAY >
+                  1
+                    ? "s"
+                    : ""}{" "}
+                  non validée
+                  {nonValidatedMissions.length -
+                    MAX_NON_VALIDATED_MISSIONS_TO_DISPLAY >
+                  1
+                    ? "s"
+                    : ""}
+                </Typography>
+              </ListItem>
+            )}
+          </List>
+        </Box>
+      )}
+    </Container>
+  );
 }
 
 function MissionItem({ mission, openHistory }) {
