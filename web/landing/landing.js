@@ -7,8 +7,8 @@ import Grid from "@material-ui/core/Grid";
 import { Header } from "../common/Header";
 import { ManagerImage, SoftwareImage, WorkerImage } from "common/utils/icons";
 import withWidth, { isWidthDown } from "@material-ui/core/withWidth";
-import BackgroundImage from "common/assets/images/landing-hero-2.svg";
-import BackgroundImageSmall from "common/assets/images/landing-hero-3.svg";
+import BackgroundHorizontalImage from "common/assets/images/landing-hero-horizontal.svg";
+import BackgroundVerticalImage from "common/assets/images/landing-hero-vertical.svg";
 import { MainCtaButton } from "../pwa/components/MainCtaButton";
 import { Footer } from "./footer";
 
@@ -183,7 +183,9 @@ export function Landing() {
     <Container key={2} maxWidth={false} className={classes.heroContainer}>
       <Container maxWidth="xl" className={`fade-in-image ${classes.heroInner}`}>
         <img
-          src={width < 500 ? BackgroundImageSmall : BackgroundImage}
+          src={
+            width < 500 ? BackgroundVerticalImage : BackgroundHorizontalImage
+          }
           width="100%"
           height="100%"
           style={{ float: "left" }}
