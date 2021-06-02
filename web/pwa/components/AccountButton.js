@@ -9,6 +9,7 @@ import { NavigationMenu } from "../../common/Header";
 import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import { MobilicLogoFilledIcon } from "common/utils/icons";
+import Marianne from "common/assets/images/marianne-small.svg";
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -18,6 +19,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center"
   },
   button: {
+    marginLeft: theme.spacing(1),
     color: darkBackground =>
       darkBackground
         ? theme.palette.primary.contrastText
@@ -43,14 +45,21 @@ export function AccountButton(props) {
 
   return (
     <Box {...mergedProps}>
-      <IconButton
-        onClick={props.onBackButtonClick}
-        className={`${classes.button} no-margin-no-padding ${
-          !props.onBackButtonClick ? "hidden" : ""
-        }`}
-      >
-        <ChevronLeftIcon />
-      </IconButton>
+      {props.onBackButtonClick ? (
+        <IconButton
+          onClick={props.onBackButtonClick}
+          className={`${classes.button} no-margin-no-padding`}
+        >
+          <ChevronLeftIcon />
+        </IconButton>
+      ) : (
+        <img
+          alt="marianne"
+          src={Marianne}
+          style={{ flexShrink: 1 }}
+          width={48}
+        />
+      )}
       <Button
         style={{ textTransform: "capitalize" }}
         startIcon={<MobilicLogoFilledIcon />}
