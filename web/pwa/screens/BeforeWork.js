@@ -25,6 +25,7 @@ import orderBy from "lodash/orderBy";
 import { LoadingButton } from "common/components/LoadingButton";
 import { useLoadingScreen } from "common/utils/loading";
 import BackgroundImage from "common/assets/images/landing-hero-vertical-without-text-logo.svg";
+import LogoWithText from "common/assets/images/mobilic-logo-white-with-text.svg";
 
 const MAX_NON_VALIDATED_MISSIONS_TO_DISPLAY = 5;
 
@@ -33,8 +34,9 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     display: "flex",
     flexDirection: "column",
-    background: `url(${BackgroundImage})`,
-    backgroundSize: "cover"
+    background: `url(${BackgroundImage}) 50%`,
+    backgroundSize: "cover",
+    position: "relative"
   },
   container: {
     position: "relative",
@@ -97,10 +99,15 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.primary.main,
     "&:hover": {
       backgroundColor: theme.palette.background.default
-    }
+    },
+    marginTop: theme.spacing(2)
   },
   subButton: {
-    color: theme.palette.background.paper
+    color: theme.palette.primary.contrastText
+  },
+  promiseText: {
+    color: theme.palette.primary.contrastText,
+    fontStyle: "italic"
   }
 }));
 
@@ -190,12 +197,15 @@ export function BeforeWork({ beginNewMission, openHistory, missions }) {
     <Container maxWidth={false} className={classes.outer} disableGutters>
       <AccountButton p={2} className={classes.accountButton} darkBackground />
       <PlaceHolder>
-        <Typography variant="h3">👋</Typography>
-        <Typography variant="h3" className={classes.welcomeText}>
-          Bienvenue sur Mobilic !
-        </Typography>
+        <img alt="mobilic-logo-text" src={LogoWithText} width={150} />
       </PlaceHolder>
       <Box key={2} mt={2} className="cta-container" mb={2}>
+        <Typography className={classes.promiseText}>
+          Le suivi de votre temps de travail
+        </Typography>
+        <Typography className={`${classes.promiseText} bold`}>
+          Fiable, facile et rapide !
+        </Typography>
         <MainCtaButton
           className={classes.ctaButton}
           onClick={onEnterNewMissionFunnel}

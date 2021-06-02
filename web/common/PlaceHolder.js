@@ -10,7 +10,7 @@ export function PlaceHolder({ children, style }) {
         ...style
       }}
     >
-      <div style={{ flexGrow: 1 }} />
+      <div style={{ flexGrow: 3 }} />
       <div style={{ flexShrink: 0 }}>{children}</div>
       <div style={{ flexGrow: 2 }} />
     </div>
